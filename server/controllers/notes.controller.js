@@ -50,7 +50,7 @@ export const updateNotes = async (req, res) => {
         const fields = ["title", "content"]
         const notesId = req.params.id
 
-        if (!notesId) {  
+        if (!notesId) {
             return res.status(400).json({
                 msg: "Invalid Note ID"
             })
@@ -77,7 +77,7 @@ export const updateNotes = async (req, res) => {
         }
 
         return res.json({ notes })
-        
+
     } catch (error) {
         console.log("Error in updating notes", error)
         res.status(500).json({ msg: "Internal server error" })
@@ -87,15 +87,15 @@ export const updateNotes = async (req, res) => {
 export const deleteNotes = async (req, res) => {
     try {
         const notesId = req.params.id
-    if(!notesId){
-        return res.json({
-            msg : "No Notes Found"
+        if (!notesId) {
+            return res.json({
+                msg: "No Notes Found"
+            })
+        }
+        await Notes.findByIdAndDelete(notesId)
+        res.json({
+            msg: "Succesfully Deleted"
         })
-    }
-    await Notes.findByIdAndDelete(notesId)
-    res.json({
-        msg : "Succesfully Deleted"
-    })
     } catch (error) {
         console.log("Error in deleting notes");
         res.status(500).json({ msg: "Internal server error" })
@@ -103,23 +103,60 @@ export const deleteNotes = async (req, res) => {
 }
 
 export const improveNotes = async (req, res) => {
-    
-}
-export const summarizeNotes = async (req, res) => {
-
-}
-
-
-export const test = async (req, res) => {
-    const prompt = req.body
-    if (!prompt) {
-        return req.json({ msg: "Please Enter prompt" })
-    }
-
     try {
-        const response = await generateContent(prompt)
-        res.json(response)
+        const notesId = req.params.id;
+
+        const note = await Notes.findById(notesId).select("content");
+
+        if (!note || !note.content) {
+            return res.status(401).json({
+                msg: "Note not found or content is empty"
+            });
+        }
+
+        const prompt = `Enhance this note while keeping it simple and natural: "${note.content}"
+                        Rules:
+                        - Keep the same core message
+                        - Fix any grammar or spelling mistakes
+                        - Use clear, everyday language
+                        - Add 1-2 relevant details if helpful
+                        - Keep the length similar to the original
+                        - Maintain a conversational tone`;
+
+        const response = await generateContent(prompt);
+
+        res.status(200).json({ improvedContent: response });
     } catch (error) {
-        console.log("Error in gen", error);
+        console.log("Error in improving notes:", error);
+        res.status(500).json({ msg: "Internal server error" });
+    }
+};
+
+export const summarizeNotes = async (req, res) => {
+    try {
+        const notesId = req.params.id;
+
+        const note = await Notes.findById(notesId).select("content");
+
+        if (!note || !note.content) {
+            return res.status(401).json({
+                msg: "Note not found or content is empty"
+            });
+        }
+
+        const prompt = `Create a brief, easy-to-read summary of this note: "${note.content}"
+                        Rules:
+                        - Use 2-3 short sentences
+                        - Focus on the main points only
+                        - Use simple, clear language
+                        - Avoid technical terms or complex phrases
+                        - Keep it friendly and conversational`;
+
+        const response = await generateContent(prompt);
+
+        res.status(200).json({ improvedContent: response });
+    } catch (error) {
+        console.log("Error in improving notes:", error);
+        res.status(500).json({ msg: "Internal server error" });
     }
 }
