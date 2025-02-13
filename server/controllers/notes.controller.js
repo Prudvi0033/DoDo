@@ -1,7 +1,7 @@
 import generateContent from "../lib/ai.js"
 
 export const test = async (req, res) => {
-    const {prompt} = req.body
+    const prompt = req.body
     if (!prompt) {
         return req.json({ msg: "Please Enter prompt" })
     }

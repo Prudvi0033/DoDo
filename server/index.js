@@ -4,12 +4,14 @@ import mongoDB from './lib/db.js';
 
 import authRotues from "./routes/auth.route.js"
 import notesRoutes from "./routes/notes.route.js"
+import cookieParser from 'cookie-parser';
 
 const app = express()
 
 config()
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api/auth",authRotues)
 app.use("/api/notes",notesRoutes)
