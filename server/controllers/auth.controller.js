@@ -121,6 +121,15 @@ export const logout = async (req, res) => {
     }
 }
 
-export const profile = async () => {
+export const getUser = async (req, res) => {
+    try {
+        if (!req.user) {
+            return res.status(401).json({ msg: "Unauthorized: No user data available" });
+        }
 
-}
+        res.status(200).json(req.user);
+    } catch (error) {
+        console.error("Error in getUser", error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+};
