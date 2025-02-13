@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use("/api/auth",authRotues)
-app.use("/api/notes",notesRoutes)
+app.use("/api/user",notesRoutes)
 
 app.listen(8000,()=>{
     console.log("Server is running");
