@@ -37,7 +37,7 @@ const Home = () => {
                     <Link to="/login" className='btn glass text-white px-4 py-2 text-sm sm:text-base flex items-center gap-2'>
                         Start Writing <Pencil size={16} />
                     </Link>
-                    <Link to="/signup" className='btn glass text-white bg-purple-700 hover:bg-purple-600 px-4 py-2 text-sm sm:text-base'>
+                    <Link to="/register" className='btn glass text-white bg-purple-700 hover:bg-purple-600 px-4 py-2 text-sm sm:text-base'>
                         Register
                     </Link>
                 </div>

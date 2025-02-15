@@ -3,6 +3,7 @@ import { EyeIcon, EyeOff, Key, Loader, User } from 'lucide-react'
 import { useAuthStore } from '../stote/useAuthStore'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast';
+import GridComponent from '../components/GridComponent';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,13 +30,15 @@ const Login = () => {
   };
 
   return (
-    <div className='flex items-center justify-center h-screen bg-black overflow-hidden dm-sans'>
-      <form onSubmit={handleLogin} className='flex rounded-lg flex-col gap-3 p-10 bg-zinc-700 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 shadow-[5px_3px_39px_0px_rgba(165,_39,_255,_0.48)]
-'>
+    <div className='flex items-center justify-center text-white h-screen bg-black overflow-hidden montserrat '>
+      <div className="absolute inset-0 z-0">
+        <GridComponent />
+      </div>
+      <form onSubmit={handleLogin} className='flex rounded-lg flex-col gap-3 p-10 bg-zinc-700 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 '>
 
         <div className="flex flex-col gap-2 items-center justify-center">
           <h1 className="text-2xl font-semibold">Welcome Back!</h1>
-          <p className="mb-4 text-sm font-light">Login to continue your Writings</p>
+          <p className="mb-4 text-sm font-light text-gray-400">Login to continue your Writings</p>
         </div>
 
         <div className="mb-4">
@@ -79,7 +82,7 @@ const Login = () => {
         <div className="mt-6 flex items-center justify-center text-sm text-gray-600">
           <p>
             Don't have an account?{' '}
-            <Link to="/signup" className="link link-primary">
+            <Link to="/register" className="link link-primary">
               Sign up
             </Link>
           </p>
