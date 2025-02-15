@@ -44,7 +44,7 @@ const Home = () => {
             </div>
 
             <div className="flex items-center justify-center relative z-10 -bottom-[3rem] px-4 opacity-80">
-                <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[50%] bg-zinc-950 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-opacity-50 backdrop-saturate-150 shadow-lg rounded-2xl p-6 sm:p-10 md:p-16 flex flex-col gap-6 shadow-[0px_20px_207px_10px_rgba(165,_39,_255,_0.48)]">
+                <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[50%] bg-zinc-950 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-opacity-50 backdrop-saturate-150 rounded-2xl p-6 sm:p-10 md:p-16 flex flex-col gap-6 shadow-[0px_20px_207px_10px_rgba(165,_39,_255,_0.48)]">
                     <div className="flex flex-wrap justify-between gap-2">
                         <div className="skeleton h-4 w-20 sm:w-28 bg-purple-700/40"></div>
                         <div className='flex flex-wrap gap-2'>

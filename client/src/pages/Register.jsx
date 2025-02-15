@@ -8,7 +8,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    confirmPassword: '',  // ✅ Added missing confirmPassword field
+    confirmPassword: '',  
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -33,7 +33,8 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-black overflow-hidden dm-sans">
-      <form onSubmit={handleRegister} className="flex rounded-lg flex-col gap-3 p-10 bg-zinc-700 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100">
+      <form onSubmit={handleRegister} className="flex rounded-lg flex-col gap-3 p-10 bg-zinc-700 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 shadow-[5px_3px_39px_0px_rgba(165,_39,_255,_0.48)]
+">
         
         <div className="flex flex-col gap-2 items-center justify-center">
           <h1 className="text-2xl font-semibold">Join Us!</h1>
