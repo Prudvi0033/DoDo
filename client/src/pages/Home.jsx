@@ -26,37 +26,25 @@ const Home = () => {
                 </a>
             </header>
 
-            {/* Hero Section */}
             <div className='relative montserrat flex items-center flex-col text-center justify-center px-6 sm:px-10'>
                 <div className='flex flex-wrap items-center gap-2 text-3xl sm:text-4xl md:text-5xl font-semibold'>
-                    Turn <i className="bg-gradient-to-tl
-from-slate-600
-via-violet-500
-to-zinc-400
-bg-clip-text
-text-transparent">Scribbles</i> into, <i className="bg-gradient-to-tl
-from-slate-600
-via-violet-500
-to-zinc-400
-bg-clip-text
-text-transparent">Smart Notes</i> with AI.
+                    Turn <i className="bg-gradient-to-tl from-slate-600 via-violet-500 to-zinc-400 bg-clip-text text-transparent">Scribbles</i> into, <i className="bg-gradient-to-tl from-slate-600 via-violet-500 to-zinc-400 bg-clip-text text-transparent">Smart Notes</i> with AI.
                 </div>
                 <h2 className='text-sm sm:text-lg md:text-xl mt-2 text-gray-300'>
                     From Rough Ideas to Refined Insights—Let AI Elevate Your Notes.
                 </h2>
                 <div className='flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4'>
-                    <button className='btn glass text-white px-4 py-2 text-sm sm:text-base flex items-center gap-2'>
+                    <Link to="/login" className='btn glass text-white px-4 py-2 text-sm sm:text-base flex items-center gap-2'>
                         Start Writing <Pencil size={16} />
-                    </button>
-                    <button className='btn glass text-white bg-purple-700 hover:bg-purple-600 px-4 py-2 text-sm sm:text-base'>
+                    </Link>
+                    <Link to="/signup" className='btn glass text-white bg-purple-700 hover:bg-purple-600 px-4 py-2 text-sm sm:text-base'>
                         Register
-                    </button>
+                    </Link>
                 </div>
             </div>
 
-            {/* Skeleton Box Section */}
-            <div className="flex items-center justify-center relative z-10 -bottom-[3rem] px-4">
-                <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[50%] bg-zinc-950 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-opacity-50 backdrop-saturate-150 shadow-lg rounded-2xl p-6 sm:p-10 md:p-16 flex flex-col gap-6 shadow-[23px_25px_149px_7px_rgba(123,_55,_184,_0.52)]">
+            <div className="flex items-center justify-center relative z-10 -bottom-[3rem] px-4 opacity-80">
+                <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[50%] bg-zinc-950 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-opacity-50 backdrop-saturate-150 shadow-lg rounded-2xl p-6 sm:p-10 md:p-16 flex flex-col gap-6 shadow-[0px_20px_207px_10px_rgba(165,_39,_255,_0.48)]">
                     <div className="flex flex-wrap justify-between gap-2">
                         <div className="skeleton h-4 w-20 sm:w-28 bg-purple-700/40"></div>
                         <div className='flex flex-wrap gap-2'>

@@ -127,9 +127,14 @@ export const getUser = async (req, res) => {
             return res.status(401).json({ msg: "Unauthorized: No user data available" });
         }
 
-        res.status(200).json(req.user);
+        res.status(200).json({
+            _id: req.user._id,
+            username: req.user.username,
+            profilePicture: req.user.profilePicture || null,
+        });
     } catch (error) {
         console.error("Error in getUser", error);
         res.status(500).json({ msg: "Internal Server Error" });
     }
 };
+
