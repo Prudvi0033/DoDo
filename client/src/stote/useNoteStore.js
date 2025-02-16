@@ -1,4 +1,7 @@
-import { useAuthStore } from "../store/useAuthStore"; // Import authStore
+import { useAuthStore } from "../stote/useAuthStore"; 
+import { create } from "zustand";
+import toast from "react-hot-toast";
+import { axiosInstance } from "../lib/axios";
 
 export const useNoteStore = create((set) => ({
     notes: [],
@@ -12,7 +15,7 @@ export const useNoteStore = create((set) => ({
             const response = await axiosInstance.post("/user/notes", data);
             set((state) => ({ notes: [...state.notes, response.data] }));
             toast.success("Created Notes");
-            useAuthStore.getState().fetchNotes(); // Refresh notes
+            useAuthStore.getState().fetchNotes(); 
         } catch (error) {
             console.log("Error in Creating Notes", error);
             toast.error("Error in Creating Notes");
@@ -31,7 +34,7 @@ export const useNoteStore = create((set) => ({
                 ),
             }));
             toast.success("Updated Note");
-            useAuthStore.getState().fetchNotes(); // Refresh notes
+            useAuthStore.getState().fetchNotes(); 
         } catch (error) {
             console.log("Error in Updating Notes", error);
             toast.error("Error in Updating Notes");
@@ -48,7 +51,7 @@ export const useNoteStore = create((set) => ({
                 notes: state.notes.filter((note) => note._id !== notesId),
             }));
             toast.success("Deleted Note");
-            useAuthStore.getState().fetchNotes(); // Refresh notes
+            useAuthStore.getState().fetchNotes(); 
         } catch (error) {
             console.log("Error in Deleting Notes", error);
             toast.error("Error in Deleting Notes");

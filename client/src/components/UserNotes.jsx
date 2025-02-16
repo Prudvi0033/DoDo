@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '../stote/useAuthStore';
 import { CirclePlus, LogOut } from 'lucide-react';
+import GenerateNote from './GenerateNote';
 
 const UserNotes = ({ selectedNote, setSelectedNote }) => {
     const { authUser, notes, gettingNotes, fetchNotes, logout } = useAuthStore();
     const profileName = authUser?.username?.charAt(0).toUpperCase() || "?";
     const [search, setSearch] = useState("");
+    const [isCreateNoteOpen, setIsCreateNoteOpen] = useState(false);
 
     useEffect(() => {
         fetchNotes(search);
@@ -72,9 +74,16 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                 </div>
 
                 <div className='flex items-center justify-center w-full p-8'>
-                    <button className='relative z-10 w-full -top-24 btn text-white text-lg bg-purple-600 glass'><CirclePlus />Create Notes</button>
+                    <button
+                        onClick={() => setIsCreateNoteOpen(true)}
+                        className={`relative z-10 w-full -top-24 btn text-white text-lg bg-purple-600 glass`}
+                    >
+                        <CirclePlus />Create Notes
+                    </button>
                 </div>
             </div>
+
+            {isCreateNoteOpen && <GenerateNote isOpen={isCreateNoteOpen} onClose={() => setIsCreateNoteOpen(false)} />}
         </div>
     );
 };
