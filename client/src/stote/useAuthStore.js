@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
     authUser: null,
+    notes : [],
+    gettingNotes : false,
     isRegistering: false,
     isLoggingIn: false,
     isCheckingAuth: true,
@@ -58,4 +60,17 @@ export const useAuthStore = create((set) => ({
             console.log("Error in Logout:", error);
         }
     },
+
+    userMessages : async (search) => {
+        set({gettingNotes : true})
+        try {
+            const response = await axiosInstance.get(`http://localhost:8000/api/user/notes?filter${search}`)
+            set({notes : response.data})
+        } catch (error) {
+            console.log("Error in getting notes");
+            toast.error("Error in getting notes")
+        } finally {
+            set({gettingNotes : false})
+        }
+    }
 }));

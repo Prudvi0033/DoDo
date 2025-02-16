@@ -3,8 +3,6 @@ import bcrypt from 'bcrypt'
 
 import User from "../models/user.model.js"
 
-import fs from 'fs'
-import path from 'path'
 
 export const register = async (req, res) => {
     try {
@@ -32,16 +30,11 @@ export const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        const publicPath = path.join(process.cwd(), "public");
-        const files = fs.readdirSync(publicPath);
-        const imageFiles = files.filter(file => file.match(/\.(jpg|jpeg|png|gif)$/i));
         
-        const randomProfilePicture = imageFiles.length > 0 ? `/${imageFiles[Math.floor(Math.random() * imageFiles.length)]}` : "";
 
         const user = await User.create({
             username,
             password: hashedPassword,
-            profilePicture : randomProfilePicture
         })
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })

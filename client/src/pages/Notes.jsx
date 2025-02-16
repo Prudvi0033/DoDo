@@ -1,8 +1,13 @@
 import React from 'react'
+import CreateNotes from '../components/CreateNotes'
+import UserNotes from '../components/UserNotes'
 
 const Notes = () => {
   return (
-    <div>Notes</div>
+    <div className='flex h-screen'>
+      <UserNotes/>
+      <CreateNotes/>
+    </div>
   )
 }
 

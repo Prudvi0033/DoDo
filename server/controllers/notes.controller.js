@@ -28,8 +28,10 @@ export const createNotes = async (req, res) => {
 export const getNotes = async (req, res) => {
     try {
         const filter = req.query.filter || ""
+        const userId = req.user._id
 
         const notes = await Notes.find({
+            user : userId,
             $or: [
                 { title: { $regex: filter, $options: "i" } },
                 { content: { $regex: filter, $options: "i" } },
