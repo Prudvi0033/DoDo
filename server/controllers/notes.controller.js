@@ -38,7 +38,7 @@ export const getNotes = async (req, res) => {
             ]
         })
 
-        res.json({
+        res.json({ 
             notes: notes
         })
     } catch (error) {

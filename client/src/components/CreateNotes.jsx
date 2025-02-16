@@ -1,9 +1,19 @@
 import React from 'react'
 
-const CreateNotes = () => {
+const CreateNotes = ({selectedNote}) => {
   return (
     <div className='w-[65%] bg-black'>
-        Notes
+        {
+          selectedNote ? (
+            <div>
+              <h1>{selectedNote.title}</h1>
+              <p>{selectedNote.content}</p>
+            </div>
+          ) :
+          (
+            <p>Select a notes to view its content or Create one</p>
+          )
+        }
     </div>
   )
 }

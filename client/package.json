@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-collaboration": "^2.11.5",
     "axios": "^1.7.9",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.1",
     "react-router-dom": "^7.1.5",
+    "y-prosemirror": "^1.2.15",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.23",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
