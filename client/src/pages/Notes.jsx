@@ -7,7 +7,7 @@ const Notes = () => {
 
     return (
         <div className='flex h-screen'>
-            <UserNotes setSelectedNote={setSelectedNote} />
+            <UserNotes selectedNote={selectedNote} setSelectedNote={setSelectedNote} />
             <CreateNotes selectedNote={selectedNote} />
         </div>
     );

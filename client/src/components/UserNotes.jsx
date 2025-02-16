@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '../stote/useAuthStore';
-import { LogOut } from 'lucide-react';
+import { CirclePlus, LogOut } from 'lucide-react';
 
 const UserNotes = ({ selectedNote, setSelectedNote }) => {
     const { authUser, notes, gettingNotes, fetchNotes, logout } = useAuthStore();
@@ -12,9 +12,8 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
     }, [search, fetchNotes]);
 
     return (
-        <div className='w-[35%] bg-black border-r border-gray-400 h-screen'>
+        <div className='w-[35%] bg-black border-r border-gray-400 h-screen overflow-hidden montserrat'>
             <div>
-                {/* User Profile & Logout Button */}
                 <div className='flex gap-2 justify-between p-8 items-center border-b border-gray-400 montserrat shadow-white'>
                     <div className='flex gap-2 items-center'>
                         <div className='bg-purple-400 flex items-center justify-center rounded-full text-white w-10 h-10'>
@@ -30,7 +29,6 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                     </div>
                 </div>
 
-                {/* Search Bar */}
                 <div className='p-2'>
                     <label className="input input-bordered flex items-center bg-zinc-800 gap-2">
                         <input
@@ -45,7 +43,6 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                     </label>
                 </div>
 
-                {/* Notes List */}
                 <div className="p-2 h-[33rem] overflow-y-auto">
                     {gettingNotes ? (
                         <p className="text-gray-300 text-center">Loading Notes...</p>
@@ -54,7 +51,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                             {notes.map((note) => (
                                 <li
                                     key={note._id}
-                                    className='p-3 cursor-pointer border-b border-gray-400 active:bg-zinc-700'
+                                    className={`p-3 cursor-pointer border-b border-gray-400 ${ selectedNote?._id === note?._id ? 'bg-zinc-800' : ''}`}
                                     onClick={() => setSelectedNote(note)}
                                 >
                                     <h3 className="font-bold truncate">{note.title || "Untitled Note"}</h3>
@@ -72,6 +69,10 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                     ) : (
                         <p className="text-gray-300 text-center">No Notes Found</p>
                     )}
+                </div>
+
+                <div className='flex items-center justify-center w-full p-8'>
+                    <button className='relative z-10 w-full -top-24 btn text-white text-lg bg-purple-600 glass'><CirclePlus />Create Notes</button>
                 </div>
             </div>
         </div>
