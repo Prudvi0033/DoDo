@@ -1,10 +1,37 @@
-import { Notebook, PenTool, Sparkles, Trash } from 'lucide-react'
-import React from 'react'
+import { Trash } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { useNoteStore } from '../stote/useNoteStore';
+import { useAuthStore } from '../stote/useAuthStore';
 
 
 const CreateNotes = ({ selectedNote }) => {
+
+  const { deleteNotes } = useNoteStore()
+  const { fetchNotes } = useAuthStore()
+  const [loading, setLoading] = useState(false)
+
+
+  const handleDelete = async () => {
+    if (!selectedNote._id) return;
+
+    try {
+      setLoading(true)
+      await deleteNotes(selectedNote._id)
+      await fetchNotes()
+      useNoteStore.setState({ selectedNote: null })
+    } catch (error) {
+      console.log("Error in deleting");
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  
+
+
+
   return (
     <div className='w-[65%] bg-black montserrat'>
       {
@@ -15,9 +42,8 @@ const CreateNotes = ({ selectedNote }) => {
                 <span className='ml-2'></span>
                 <h1 className='text-2xl p-5 text-white'>{selectedNote.title}</h1>
               </div>
-              <div className='flex  mt-2 items-center justify-center gap-3'>
-                <button className='btn glass bg-blue-800 text-white'>Edit <PenTool/></button>
-                <button className='btn glass bg-error text-white'>Delete <Trash /></button>
+              <div className='flex  mt-2 items-center justify-center ml-6'>
+                <button className='btn glass bg-error text-white' disabled={loading} onClick={handleDelete}>Delete <Trash /></button>
               </div>
             </div>
 
@@ -30,8 +56,8 @@ const CreateNotes = ({ selectedNote }) => {
         ) :
           (
             <div className='flex flex-col gap-3 items-center justify-center h-screen'>
-              <p className='text-center text-2xl'>Select a notes to view its content or Create one</p>
-              <p className='font-semibold text-xl'>Refresh Page if notes aren't visible</p>
+              <p className='text-center text-3xl'>Select a notes to view its content or Create one</p>
+              <p className='font-semibold text-xl'>Refresh Page if notes aren't visible and after deletion</p>
             </div>
           )
       }

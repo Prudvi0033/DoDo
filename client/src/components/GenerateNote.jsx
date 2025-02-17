@@ -8,8 +8,6 @@ import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import { ChevronLeft, Notebook, Sparkles } from 'lucide-react';
 
-
-
 const CreateNoteModal = ({ isOpen, onClose }) => {
     const { createNotes } = useNoteStore();
     const [title, setTitle] = useState('');

@@ -24,24 +24,6 @@ export const useNoteStore = create((set) => ({
         }
     },
 
-    editNotes: async (notesId, data) => {  
-        set({ updatingNotes: true });
-        try {
-            const response = await axiosInstance.put(`/user/notes/${notesId}`, data);
-            set((state) => ({
-                notes: state.notes.map((note) =>
-                    note._id === notesId ? response.data : note
-                ),
-            }));
-            toast.success("Updated Note");
-            useAuthStore.getState().fetchNotes(); 
-        } catch (error) {
-            console.log("Error in Updating Notes", error);
-            toast.error("Error in Updating Notes");
-        } finally {
-            set({ updatingNotes: false });
-        }
-    },
 
     deleteNotes: async (notesId) => {  
         set({ deletingNotes: true });
