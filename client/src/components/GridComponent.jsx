@@ -6,7 +6,7 @@ const GridComponent = () => {
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/60 to-black"></div>
 
       <div className="relative w-[130rem] h-[90rem] grid grid-cols-4 grid-rows-4">
-        {[...Array(7)].map((_, rowIndex) => (
+        {[...Array(7)].map((_, rowIndex) => ( 
           <div
             key={rowIndex}
             className="absolute left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-40"

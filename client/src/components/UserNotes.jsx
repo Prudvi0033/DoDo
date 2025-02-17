@@ -13,7 +13,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
 
     useEffect(() => {  
         fetchNotes(search);
-    }, [search, fetchNotes]);
+    }, [search, fetchNotes]); 
 
     // Custom renderer for ReactMarkdown
     const renderers = {
@@ -21,7 +21,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
     };
 
     return (
-        <div className='w-[35%] bg-black border-r border-gray-400 h-screen overflow-hidden montserrat'>
+        <div className='w-full sm:w-[35%] bg-black border-r border-gray-400 h-screen overflow-hidden montserrat'>
             {/* Header Section */}
             <div className='flex gap-2 justify-between p-8 items-center border-b border-gray-400 shadow-white'>
                 <div className='flex gap-2 items-center'>
@@ -75,7 +75,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                                     rehypePlugins={[rehypeRaw]} 
                                     components={renderers} // Apply custom renderer
                                 >
-                                    {note.content.replace(/\n/g, "  \n")}
+                                    {note.content.replace(/\n/g, '  \n')}
                                 </ReactMarkdown>
                                 <p className='mt-2 text-gray-400 text-[10px]'>
                                     {new Date(note.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}
@@ -92,7 +92,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
             <div className='flex items-center justify-center w-full p-8'>
                 <button
                     onClick={() => setIsCreateNoteOpen(true)}
-                    className={`relative z-10 w-full -top-24 btn text-white text-lg bg-purple-600 glass`}
+                    className={`relative z-10 w-full -top-56 text-center lg:-top-24 btn text-white lg:text-lg bg-purple-600 glass`}
                 >
                     <CirclePlus />Create Notes 
                 </button>

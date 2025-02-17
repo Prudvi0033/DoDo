@@ -1,4 +1,4 @@
-import { Notebook, Trash } from 'lucide-react';
+import { Notebook, Trash, ArrowLeft } from 'lucide-react';  // Added ArrowLeft for the back button
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -48,16 +48,22 @@ const CreateNotes = ({ selectedNote }) => {
     navigator.clipboard.writeText(summarizedText);
   };
 
+  const handleBack = () => {
+    window.history.back();
+  };
+
   return (
-    <div className='w-[65%] bg-black montserrat'>
+    <div className='w-full lg:w-[65%] bg-black montserrat'>
       {selectedNote ? (
         <div>
           <div className='flex justify-between items-center border-b'>
-            <div className='flex items-center gap-2 '>
-              <span className='ml-2'></span>
+            <div className='flex items-center gap-2'>
+              <button onClick={handleBack} className='btn glass text-white bg-gray-600'>
+                <ArrowLeft />
+              </button>
               <h1 className='text-2xl p-5 text-white'>{selectedNote.title}</h1>
             </div>
-            <div className='flex gap-3 mt-2 items-center justify-center ml-6'>
+            <div className='lg:flex grid gap-3 mt-2 items-center justify-center ml-6'>
               <button className='btn glass text-white bg-purple-600' onClick={handleSummarize}>
                 Summarize <Notebook />
               </button>
@@ -68,8 +74,8 @@ const CreateNotes = ({ selectedNote }) => {
           </div>
 
           <div className='p-4'>
-            <div className='bg-zinc-800 rounded-lg h-[530px] overflow-hidden'>
-              <ReactMarkdown className='p-6 text-lg' rehypePlugins={rehypeRaw}>
+            <div className='bg-zinc-800 rounded-lg h-screen lg:h-[530px] sm:h-auto overflow-hidden'>
+              <ReactMarkdown className='p-6 text-lg' rehypePlugins={[rehypeRaw]}>
                 {selectedNote.content ? selectedNote.content.replace(/\n/g, '  \n') : 'No content available'}
               </ReactMarkdown>
             </div>
@@ -77,8 +83,8 @@ const CreateNotes = ({ selectedNote }) => {
         </div>
       ) : (
         <div className='flex flex-col gap-3 items-center justify-center h-screen'>
-          <p className='text-center text-3xl'>Select a note to view its content or Create one</p>
-          <p className='font-semibold text-xl'>Refresh Page if notes aren't visible and after deletion</p>
+          <p className='text-center text-sm lg:text-3xl'>Select a note to view its content or Create one</p>
+          <p className='font-semibold text-sm lg:text-xl'>Refresh Page if notes aren't visible and after deletion</p>
         </div>
       )}
 
