@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '../stote/useAuthStore';
 import { CirclePlus, LogOut } from 'lucide-react';
 import GenerateNote from './GenerateNote';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+
 
 const UserNotes = ({ selectedNote, setSelectedNote }) => {
     const { authUser, notes, gettingNotes, fetchNotes, logout } = useAuthStore();
@@ -12,6 +15,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
     useEffect(() => {
         fetchNotes(search);
     }, [search, fetchNotes]);
+
 
     return (
         <div className='w-[35%] bg-black border-r border-gray-400 h-screen overflow-hidden montserrat'>
@@ -59,7 +63,7 @@ const UserNotes = ({ selectedNote, setSelectedNote }) => {
                                     <h3 className="font-bold truncate">{note.title || "Untitled Note"}</h3>
                                     
                                     <p className="text-gray-400 truncate">
-                                        {note.content || "No content available"}
+                                    <ReactMarkdown rehypePlugins={rehypeRaw}>{note.content.replace(/\n/g, "  \n")}</ReactMarkdown>
                                     </p>
 
                                     <p className='mt-2 text-gray-400 text-[10px]'>
