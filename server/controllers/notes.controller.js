@@ -31,14 +31,14 @@ export const getNotes = async (req, res) => {
         const userId = req.user._id
 
         const notes = await Notes.find({
-            user : userId,
+            user: userId,
             $or: [
                 { title: { $regex: filter, $options: "i" } },
                 { content: { $regex: filter, $options: "i" } },
             ]
         })
 
-        res.json({ 
+        res.json({
             notes: notes
         })
     } catch (error) {
@@ -111,7 +111,7 @@ export const improveNotes = async (req, res) => {
         const note = await Notes.findById(notesId).select("content");
 
         if (!note || !note.content) {
-            return res.status(401).json({
+            return res.status(404).json({
                 msg: "Note not found or content is empty"
             });
         }
@@ -127,26 +127,18 @@ export const improveNotes = async (req, res) => {
 
         const response = await generateContent(prompt);
 
-        res.status(200).json({ improvedContent: response });
+        res.status(200).json({ content: response }); // ✅ Fixing response key
     } catch (error) {
-        console.log("Error in improving notes:", error);
+        console.error("Error in improving notes:", error);
         res.status(500).json({ msg: "Internal server error" });
     }
 };
 
 export const summarizeNotes = async (req, res) => {
     try {
-        const notesId = req.params.id;
+        const { content } = req.body;
 
-        const note = await Notes.findById(notesId).select("content");
-
-        if (!note || !note.content) {
-            return res.status(401).json({
-                msg: "Note not found or content is empty"
-            });
-        }
-
-        const prompt = `Create a brief, easy-to-read summary of this note: "${note.content}"
+        const prompt = `Create a brief, easy-to-read summary of this note: "${content}" 
                         Rules:
                         - Use 2-3 short sentences
                         - Focus on the main points only
@@ -154,11 +146,12 @@ export const summarizeNotes = async (req, res) => {
                         - Avoid technical terms or complex phrases
                         - Keep it friendly and conversational`;
 
-        const response = await generateContent(prompt);
-
-        res.status(200).json({ improvedContent: response });
+        const response = await generateContent(prompt); // Function that handles the summarization logic
+        res.status(200).json({ summary: response }); // Return summary in response
     } catch (error) {
-        console.log("Error in improving notes:", error);
+        console.error("Error in summarizing notes:", error);
         res.status(500).json({ msg: "Internal server error" });
     }
-}
+};
+
+

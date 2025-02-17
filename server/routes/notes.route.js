@@ -10,8 +10,8 @@ router.get("/notes",protectRoute,getNotes)
 router.put("/notes/:id",protectRoute,updateNotes)   
 router.delete("/notes/:id",protectRoute,deleteNotes)
 
-router.post("/notes/improve/:id",protectRoute,improveNotes)
-router.post("/notes/summarize/:id",protectRoute,summarizeNotes)
+router.post("/notes/improve",protectRoute,improveNotes)
+router.post("/notes/summarize",protectRoute,summarizeNotes)
 
 
 export default router

@@ -8,6 +8,7 @@ export const useNoteStore = create((set) => ({
     creatingNotes: false,
     updatingNotes: false,
     deletingNotes: false,
+    summarizedNotes : "",
 
     createNotes: async (data) => {
         set({ creatingNotes: true });
@@ -41,4 +42,5 @@ export const useNoteStore = create((set) => ({
             set({ deletingNotes: false });
         }
     },
+
 }));

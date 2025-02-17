@@ -5,6 +5,7 @@ import UserNotes from '../components/UserNotes'
 const Notes = () => {
   const [selectedNote, setSelectedNote] = useState(null);
 
+
     return (
         <div className='flex h-screen'>
             <UserNotes selectedNote={selectedNote} setSelectedNote={setSelectedNote} />

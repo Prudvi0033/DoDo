@@ -8,9 +8,10 @@ import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import { ChevronLeft, Notebook, Sparkles } from 'lucide-react';
 
-const CreateNoteModal = ({ isOpen, onClose }) => {
-    const { createNotes } = useNoteStore();
+const CreateNoteModal = ({ isOpen, onClose, selectedNote }) => {
+    const { createNotes, improveNotes,summarizeNotes } = useNoteStore();
     const [title, setTitle] = useState('');
+    
 
     const editor = useEditor({
         extensions: [
@@ -23,6 +24,12 @@ const CreateNoteModal = ({ isOpen, onClose }) => {
         content: '',
         autofocus: 'start',
     });
+
+    const handleImprove = () => {
+        console.log(selectedNote);
+
+        improveNotes(selectedNote._id)
+    };
 
 
     const handleSubmit = async () => {
@@ -52,10 +59,6 @@ const CreateNoteModal = ({ isOpen, onClose }) => {
                     <div className='flex gap-2 items-center mb-4'>
                         <button className="hover:text-error hover:scale-105 duration-300" onClick={onClose}><ChevronLeft /></button>
                         <h2 className="text-2xl font-bold ">Create a New Note</h2>
-                    </div>
-                    <div className='px-4 flex gap-4 mb-2'>
-                        <button className='btn glass text-white bg-zinc-950'>Improve <Sparkles /></button>
-                        <button className='btn glass text-white bg-purple-600'>Summarize <Notebook /></button>
                     </div>
                 </div>
                 <input
